@@ -9,6 +9,7 @@ go:
 install:
  - go get -d ./...
  - go get github.com/stretchr/testify/assert
+ - go get github.com/codegangsta/cli
 
 script:
  - go test -v ./...
