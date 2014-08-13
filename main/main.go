@@ -5,6 +5,7 @@ import (
 	"github.com/codegangsta/cli"
 	"github.com/nevon/gogel"
 	"io/ioutil"
+	"log"
 	"os"
 	"strings"
 )
@@ -29,6 +30,8 @@ func main() {
 		if err == nil {
 			tree := gogel.Parse(string(html))
 			Walk(tree[0], 0)
+		} else {
+			log.Fatalf("Failed to open file (%v): %v", c.String("html"), err)
 		}
 	}
 
