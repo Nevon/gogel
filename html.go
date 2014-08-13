@@ -53,7 +53,7 @@ func (p *Parser) parseNode() Node {
 
 func (p *Parser) parseText() *TextNode {
 	return NewTextNode(p.consumeWhile(func(char string) bool {
-		return char != ">"
+		return char != "<"
 	}))
 }
 
@@ -81,8 +81,8 @@ func (p *Parser) parseElement() *ElementNode {
 		panic(fmt.Sprintf("Malformed input. %v was not an opening <", startEndTag))
 	}
 
-	if endTagSlash != ">" {
-		panic(fmt.Sprintf("Malformed input. %v was not a closing >", endTagSlash))
+	if endTagSlash != "/" {
+		panic(fmt.Sprintf("Malformed input. %v was not a closing /", endTagSlash))
 	}
 
 	endTagName := p.parseTagName()
@@ -150,7 +150,7 @@ func (p *Parser) nextChar() string {
 }
 
 func (p *Parser) startsWith(needle string) bool {
-	return p.input[0] == needle
+	return strings.HasPrefix(strings.Join(p.input[p.position:], ""), needle)
 }
 
 func (p *Parser) eof() bool {
@@ -176,8 +176,8 @@ func (p *Parser) consumeWhile(test func(char string) bool) string {
 	return strings.Join(result, "")
 }
 
-func (p *Parser) consumeWhitespace() {
-	p.consumeWhile(func(char string) bool {
+func (p *Parser) consumeWhitespace() string {
+	return p.consumeWhile(func(char string) bool {
 		return char == " " || char == "\n" || char == "\t" || char == "\r"
 	})
 }
