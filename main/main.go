@@ -7,11 +7,6 @@ import (
 )
 
 func main() {
-	// body := gogel.NewElementNode("body", make(map[string]string), []gogel.Node{})
-	// body.Children = append(body.Children, gogel.NewElementNode("div", map[string]string{"id": "test"}, []gogel.Node{}))
-
-	// Walk(body, 0)
-
 	doc := "<html><body><h1>Hello friends</h1><div id='myDiv'><p>This is a paragraph</p><p>Followed by another paragraph.</p></div></body></html>"
 
 	tree := gogel.Parse(doc)
